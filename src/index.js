@@ -8,6 +8,7 @@ const redis = require("./redis.js");
 const cors = require("cors");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
+var cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
