@@ -1,8 +1,4 @@
-const {
-  ApolloServer,
-  // ApolloError,
-  ValidationError,
-} = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
 const session = require("express-session");
 const connectRedis = require("connect-redis");
@@ -27,21 +23,8 @@ let sessionOptions = {
   secret: String(process.env.SECRET),
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    // maxAge: 10000,
-  },
+  cookie: {},
 };
-
-// if (process.env.SECURE === "yes") {
-//   app.set("trust proxy", 1); // trust first proxy
-//   sessionOptions.cookie.secure = true; // serve secure cookies
-//   // sessionOptions.cookie.maxAge = 10000;
-// }
-
-// else if (process.env.SECURE === "no") {
-//   app.set("trust proxy", 1); // trust first proxy
-//   sessionOptions.cookie.maxAge = 10000; // serve secure cookies
-// }
 
 const server = new ApolloServer({
   typeDefs,
@@ -57,6 +40,8 @@ app.use(
 );
 
 app.use(session(sessionOptions));
+
+app.use(cookieParser());
 
 server.applyMiddleware({ app, cors: false });
 
