@@ -42,7 +42,7 @@ app.use(
 
 app.use(session(sessionOptions));
 
-app.use(cookieParser());
+app.use(cookieParser(process.env.SECRET));
 
 server.applyMiddleware({ app, cors: false });
 
