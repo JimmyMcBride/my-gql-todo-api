@@ -1,5 +1,5 @@
 const db = require("../../data/knexConf");
-const { ApolloError } = require("apollo-server-express");
+const { ApolloError, ValidationError } = require("apollo-server-express");
 
 const Query = {
   Query: {
@@ -16,7 +16,9 @@ const Query = {
       try {
         const todo = await db("todos").where({ id }).first();
         if (!todo)
-          throw new ApolloError("A todo with that id could not be found. 🤷‍♂");
+          throw new ValidationError(
+            "A todo with that id could not be found. 🤷‍♂"
+          );
         return todo;
       } catch (err) {
         console.log(err);
