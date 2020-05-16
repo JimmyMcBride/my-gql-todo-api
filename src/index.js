@@ -52,7 +52,7 @@ const server = new ApolloServer({
 app.use(
   cors({
     credentials: false,
-    // origin: process.env.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN,
   })
 );
 
