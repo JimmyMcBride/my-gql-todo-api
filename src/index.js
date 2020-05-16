@@ -32,11 +32,11 @@ let sessionOptions = {
   },
 };
 
-if (process.env.SECURE === "yes") {
-  app.set("trust proxy", 1); // trust first proxy
-  sessionOptions.cookie.secure = true; // serve secure cookies
-  // sessionOptions.cookie.maxAge = 10000;
-}
+// if (process.env.SECURE === "yes") {
+//   app.set("trust proxy", 1); // trust first proxy
+//   sessionOptions.cookie.secure = true; // serve secure cookies
+//   // sessionOptions.cookie.maxAge = 10000;
+// }
 
 // else if (process.env.SECURE === "no") {
 //   app.set("trust proxy", 1); // trust first proxy
@@ -51,7 +51,7 @@ const server = new ApolloServer({
 
 app.use(
   cors({
-    credentials: false,
+    credentials: true,
     origin: process.env.CORS_ORIGIN,
   })
 );
