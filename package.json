@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/index.js",
     "server": "nodemon src/index.js",
-    "db-remake": "psql -U fireninja -f remakeDatabase.sql",
+    "db-remake": "psql -U postgres -f remakeDatabase.sql",
     "knex-refresh": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "total-reset": "yarn db-remake && yarn knex-refresh"
   },

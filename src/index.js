@@ -19,7 +19,7 @@ const port = process.env.PORT;
 
 const RedisStore = connectRedis(session);
 
-const sessionOptions = {
+let sessionOptions = {
   store: new RedisStore({
     client: redis,
   }),
@@ -27,7 +27,13 @@ const sessionOptions = {
   secret: String(process.env.SECRET),
   resave: false,
   saveUninitialized: false,
+  cookie: {},
 };
+
+if (process.env.SECURE === "yes") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionOptions.cookie.secure = true; // serve secure cookies
+}
 
 const server = new ApolloServer({
   typeDefs,
@@ -47,5 +53,5 @@ app.use(session(sessionOptions));
 server.applyMiddleware({ app, cors: false });
 
 app.listen(port, () => {
-  console.log(`Server ready on http://localhost:${port}/graphq`);
+  console.log(`Server ready on http://localhost:${port}/graphq 🚀`);
 });
